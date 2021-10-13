@@ -6,7 +6,7 @@ triple x = x *3
 signo :: Int -> Int
 signo x |x > 0 = 1
         |x < 0 = -1
-        |otherwise = 0
+        |x == 0 = 0
 
 
         
@@ -35,8 +35,8 @@ notaycon :: (String,Float,Float,Float) -> (Float,String)
 notaycon a = (notaFinal a, condicion a)
 
 
-duplica :: Int ->Int
-duplica a = 2*a
+duplicaS :: Int ->Int
+duplicaS a = 2*a
 
 
 esBisiesto :: Int -> Bool
@@ -56,5 +56,64 @@ dispersion x y z = (max3 x y z) - (min3 x y z)
 mayor3 :: (Int,Int,Int) -> (Bool,Bool,Bool)
 mayor3 (a,b,c) = (a>3,b>3,c>3)
 
+segundo3 :: (Int,Int,Int) -> Int
+segundo3 (a,b,c) = b
+
+ordena :: (Int,Int) -> (Int, Int)
+ordena (a,b) |a>b = (b,a)
+             |a<b = (a,b)   
+
+ordena3 :: (Int,Int,Int) -> (Int,Int,Int)
+ordena3 (a,b,c) |a<b && b<c = (a,b,c)
+                |b<a && a<c = (b,a,c)
+                |b<c && c<a = (b,c,a)
+                |c<a && a<b = (c,a,b)
+                |a<c && c<b = (a,c,b)
+                |c<b && b<a = (c,b,a)
+
+                                --- Recursión --- 
+
+contar :: [Int] -> Int 
+contar [] = 0
+contar (x:xs) = 1 + contar(xs)                                
+
+lista = [1,2,3,4,5,6,7]
 
 
+sumaL :: [Int] -> Int 
+sumaL [] = 0
+sumaL (x:xs) = x + sumaL xs 
+
+productoL :: [Int] -> Int 
+productoL [] = 1
+productoL (x:xs) = x * productoL xs 
+
+
+card :: [Int] -> Int
+card [] = 0
+card (x:xs) = 1 + card xs 
+
+
+todosMenores10 :: [Int] -> Bool
+todosMenores10 [] = True
+todosMenores10 (x:xs) = x < 10 && todosMenores10 xs 
+
+
+hay0 :: [Int] -> Bool
+hay0 [] = False 
+hay0 (x:xs) = x == 0 || hay0 xs 
+
+
+sumar1 :: [Int] -> [Int]
+sumar1 [] = []
+sumar1 (x:xs) = (x + 1) : sumar1 xs 
+
+
+duplica :: [Int] -> [Int]
+duplica [] = []
+duplica (x:xs) = (x*2) : duplica xs 
+
+
+multiplica :: Int -> [Int] -> [Int]
+multiplica n [] = []
+multiplica n (x:xs) = (n*x) : multiplica n xs 
