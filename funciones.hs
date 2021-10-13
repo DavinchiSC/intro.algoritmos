@@ -117,3 +117,31 @@ duplica (x:xs) = (x*2) : duplica xs
 multiplica :: Int -> [Int] -> [Int]
 multiplica n [] = []
 multiplica n (x:xs) = (n*x) : multiplica n xs 
+
+
+soloPares :: [Int] -> [Int]
+soloPares [] = []
+soloPares (x:xs)| mod x 2 == 0 = x : soloPares xs 
+                |otherwise = soloPares xs
+
+
+mayoresQue10 :: [Int] -> [Int]
+mayoresQue10 [] = []
+mayoresQue10 (x:xs) |x > 10 = x : mayoresQue10 xs 
+                    |otherwise = mayoresQue10 xs 
+
+
+mayoresQue :: Int -> [Int] -> [Int]                    
+mayoresQue n [] = []
+mayoresQue n (x:xs) |x > n = x : mayoresQue n xs 
+                    |otherwise = mayoresQue n xs 
+
+
+-- toma una lista xs (a izquierda) y un natural n que indica una cantidad, y devuelve la sublista con los primeros n elementos de xs. Ej: 
+-- [1, 2, 3, 4, 5, 6] ↑ 2 = [1, 2]
+
+tomar :: Int -> [Int] -> [Int]
+tomar n _|n <= 0 = []
+tomar _ [] = [] 
+tomar n (x:xs) = x : (tomar (n-1) xs) 
+
