@@ -145,3 +145,9 @@ tomar n _|n <= 0 = []
 tomar _ [] = [] 
 tomar n (x:xs) = x : (tomar (n-1) xs) 
 
+
+h:: Float -> Float
+h 0 = 0
+h n = 2 + h (n-1)
+
+
