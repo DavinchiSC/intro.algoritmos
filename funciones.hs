@@ -151,3 +151,17 @@ h 0 = 0
 h n = 2 + h (n-1)
 
 
+
+--a) la función acumular: Nat → Nat, que dado un Natural n devuelve la suma de todos los naturales menores o iguales a n.
+acumular :: Int -> Int
+acumular n|n == 0 = 0 
+acumular n = n + acumular (n-1)
+
+
+
+--b) la función factorial: Nat → Nat, que dado un Natural n devuelve el factorial de n.
+factorial :: Int -> Int
+factorial n|n == 0 = 1
+factorial n = n * factorial (n-1)
+
+
