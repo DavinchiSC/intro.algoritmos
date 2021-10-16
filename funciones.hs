@@ -165,3 +165,53 @@ factorial n|n == 0 = 1
 factorial n = n * factorial (n-1)
 
 
+--c) la función sumaCuadrados: Nat → Nat, que dado un Natural n devuelve la suma de todos los naturales menores o iguales a n elevados al cuadrado.
+
+sumaCuadrados :: Int -> Int
+sumaCuadrados 0 = 0 
+sumaCuadrados n = n^2 + sumaCuadrados (n-1)
+
+
+--d ) la función repetir: Nat → Nat → Nat, que dado un dos naturales n y m suma n veces el número m.
+
+repetir :: Int ->Int -> Int 
+repetir n 0 = 0 
+repetir n m = n + repetir n (m-1)
+
+
+--Ejercicio 12:  Utilizando la multiplicación, definir la función potencia, que dado dos naturales b y p devuelve b^p .
+
+potencia :: Int -> Int -> Int 
+potencia _ 0 = 1 
+potencia n m = n * potencia n (m-1) 
+
+--Ejercicio 13: Una función de tipo zip es aquella que dadas dos listas devuelve una lista de pares donde el primer elemento de cada par se corresponde con la primera lista, y el segundo elemento de cada par se corresponde con la segunda lista. Por ejemplo: repartir: [String] → [String] → [(String, String)] donde los elementos de la primera lista son nombres de personas y los de la segunda lista son cartas españolas es una función que devuelve una lista de pares que le asigna a cada persona una carta.
+--Ej: repartir.[“Juan”, “Maria”].[“1 Copa”, “3deOro”, “7deEspada”, “2deBasto”] =
+--   [(“Juan”, “1deCopa”), (“Maria”, “3deOro”)]
+--Defina la función recursivamente.
+
+
+repartir :: [String] -> [String] -> [(String, String)]
+repartir [] [] = []
+repartir [] _ = []
+repartir _ [] = []
+repartir (x:xs) (z:zs) = (x,z) : (repartir xs zs)         
+
+
+--Ejercicio 14: Una función de tipo unzip es aquella que dada una lista de tuplas devuelve una lista de alguna de las proyecciones de la tupla. Por ejemplo, si tenemos una lista de ternas donde el primer elemento representa el nombre de un alumno, el segundo el apellido, y el tercero la edad, la función que devuelve la lista de todos los apellidos de los alumnos en una de tipo unzip.
+--Definir la función apellidos : [(String, String, Int)] → [String]
+--Ej: apellidos.[(”Juan”, ”Dominguez”, 22), (”Maria”, ”Gutierrez”, 19), (”Damian”, ”Rojas”, 18)] =
+--[”Dominguez””Gutierrez”, ”Rojas”]
+--Defina la función recursivamente.
+
+
+apellidos :: [(String,String,Int)] -> [String]
+apellidos [] = []
+apellidos ((a,b,c):as) = a : apellidos as
+
+
+--d) expandir : String → String, pone espacios entre cada letra de una palabra.
+expandir :: String -> String
+expandir (x:xs)|length xs == 0 = x : xs
+expandir [] = []  
+expandir (x:xs) = (x : " " ) ++ expandir xs
