@@ -222,6 +222,4 @@ expandir (x:xs) = (x : " " ) ++ expandir xs
 
 maximo :: [Int] -> Int
 maximo [x] = x
-maximo (x:y:xs)| x > y = maximo (x : xs)
-                 | x < y = maximo (y : xs)
-                 | x == y = maximo (x :xs) 
+maximo (x:xs) = max x (maximo xs)
