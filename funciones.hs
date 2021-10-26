@@ -215,3 +215,13 @@ expandir :: String -> String
 expandir (x:xs)|length xs == 0 = x : xs
 expandir [] = []  
 expandir (x:xs) = (x : " " ) ++ expandir xs
+
+--a) maximo : [Int] → Int, que calcula el máximo elemento de una lista de enteros.
+--Por ejemplo: maximo.[2, 5, 1, 7, 3] = 7
+--Ayuda: Ir tomando de a dos elementos de la lista y ‘quedarse’ con el mayor. ¡Cuidado con el caso base!
+
+maximo :: [Int] -> Int
+maximo [x] = x
+maximo (x:y:xs)| x > y = maximo (x : xs)
+                 | x < y = maximo (y : xs)
+                 | x == y = maximo (x :xs) 
