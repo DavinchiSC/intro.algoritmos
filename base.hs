@@ -60,8 +60,7 @@ busqueda :: Extracciones -> Int -> String -> String ->  Int
 busqueda [] an prod prov  = 0
 busqueda (x:xs) an  prod prov |((anio x) == an) && ((provincia x) == prov) && (producto x) == prod = cantidad x
                               |otherwise = busqueda xs an  prod prov 
---Ésta funcion devuelve las toneladas de la extraccion según el año, producto y provincia que deseemos encontrar.
-
+--Ésta funcion devuelve las toneladas de la extraccion según el año, producto y provincia que deseemos encontrar. 
 
 
 totalProvincia :: String -> Extracciones -> Int
