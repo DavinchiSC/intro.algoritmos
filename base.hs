@@ -5,7 +5,7 @@ type Extracciones = [Extraccion]
 
 
 
---Proyyeciones.
+--Proyeciones.
 
 
 anio :: Extraccion -> Int
@@ -56,9 +56,6 @@ elijeProducto t (x:xs)|(producto x) == t = x : (elijeProducto t xs)
 
 
 
-
---Habiendo definido las funciones anteriores, voy a combinar algunas para hacer un par de funciones mas que sirvan para analizar la base.
-
 busqueda :: Extracciones -> Int -> String -> String ->  Int
 busqueda [] an prod prov  = 0
 busqueda (x:xs) an  prod prov |((anio x) == an) && ((provincia x) == prov) && (producto x) == prod = cantidad x
@@ -71,10 +68,32 @@ totalProvincia :: String -> Extracciones -> Int
 totalProvincia prov xs = total_Extraido(elijeProvincia prov xs)   
 --Calcula el total de toneladas extraidas de una provincia.   
 
-sacaAnio :: Extracciones -> [(String,String,Int)]
-sacaAnio [] = []
-sacaAnio ((a,b,c,d):xs) = (b,c,d) : (sacaAnio xs)
---Una función tipo map (no se me ocurrió ninguna realmente útil con ésta base, ya que es dificil aplicarle una misma funcion a datos así y que sea útil, ésta lo que hace es sacar el año de cada tupla de la base).
+tonelada :: Extracciones -> [Int]
+tonelada [] = []
+tonelada ((a,b,c,d):xs) = d : (tonelada xs)
+--Una función tipo map que convierte la lista de tuplas en una lista con las toneladas de cada tupla que se le dé.
+--No es de mucha utilidad para analizar la base pero sirve para combinarla con otra funcion que si sirva para ello.
+
+
+totalProdAn :: Extracciones -> Int -> String -> Int
+totalProdAn xs an pr  = total_Extraido (elijeProducto pr (elijeAnio an xs))
+--Dado un año y un producto, la funcion calcula el total de toneladas del producto extraidas en ese año utilizando al mismo tiempo 3 funciones ya definidas, una tipo fold y dos tipo filter, formando así, ésta nueva función fold.
+
+
+maxProvincia :: Extracciones -> Int
+maxProvincia [] = 0
+maxProvincia (x:xs) = max (totalProvincia(provincia x)(x:xs)) (maxProvincia xs)
+--Calcula la cantidad de toneladas de la provincia que mas tiene.
+
+
+
+provinciaConMas :: String -> Extracciones -> (String, Int)
+provinciaConMas prod [] = (prod,0)
+provinciaConMas prod (x:xs)| (maxProvincia (elijeProducto prod (x:xs))) == (totalProvincia(provincia x)(elijeProducto prod (x:xs))) = ((provincia x),((maxProvincia (elijeProducto prod (x:xs)))))
+                           |otherwise = provinciaConMas prod xs
+
+--Ésta función recibe un "producto", la base de datos y nos dice: de qué provincia se extrajo mas cantidad de ese producto.(Probablemente haya una forma mas facil de hacerla pero así me salió despues de muuuchas horas)
+
 
 
 
