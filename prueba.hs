@@ -55,3 +55,14 @@ repartir (x:xs) (y:ys) = (x,y) : repartir xs ys
 apellidos :: [(String,String,Int)] -> [String]
 apellidos [] = []
 apellidos ((a,b,c):xs) = b : (apellidos xs) 
+
+
+vab :: [Char] -> [Char]
+vab [] = []
+vab (x:xs) |(x == 'a') = vab xs
+           |(x /= 'a') = x : (vab xs)
+
+
+ordenaL :: [(Int,Int)] -> [(Int,Int)]
+ordenaL [] = []
+ordenaL ((a,b):xs) = ((min a b), (max a b)) : (ordenaL xs)
